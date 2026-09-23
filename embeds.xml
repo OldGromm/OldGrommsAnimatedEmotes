@@ -1,0 +1,27 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+<Script file="libraries\LibStub\LibStub.lua"/>
+<Script file="libraries\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+<Script file="libraries\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
+<Script file="libraries\LibDBIcon-1.0\LibDBIcon-1.0.lua"/>
+<Include file="libraries\LibEditMode\embed.xml"/>
+
+<Script file="database\OGAE_Database_GlobalVariables.lua"/>
+<Script file="database\OGAE_Database_Emotes.lua"/>
+
+<Script file="localization\deDE.lua"/>
+<Script file="localization\enUS.lua"/>
+
+<Script file="OGAE_General.lua"/>
+<Script file="OGAE_Emotes.lua"/>
+<Script file="OGAE_EditMode.lua"/>
+
+<Script file="OGAE_Options.lua"/>
+
+<Script file="OGAE_Compartment.lua"/>
+<Script file="OGAE_MinimapButton.lua"/>
+<Script file="OGAE_SlashCommands.lua"/>
+
+<Script file="OGAE_Events.lua"/>
+</Ui>
