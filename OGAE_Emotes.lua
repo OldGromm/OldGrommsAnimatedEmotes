@@ -196,10 +196,10 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
 	    local emote_icon_new = v[OGAE_WoWVersion]
 		local keywords_list = v["SearchWords"]
 		for _, k in ipairs(keywords_list) do
-			if string.find(EmoteText, k) then
+			if string.find(EmoteText, k, nil, true) then
 		        emote_icon = emote_icon_new
-			break
-		end
+			    break
+		    end
 		end
 	end
 
@@ -215,8 +215,16 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
     	local origin = OGAE_Frames[VariableName_Origin_Texture]
     	
 		---- check if player name is availabe. If the value is empty, use the GUID as a backup instead.
-        local Sender = UnitTokenFromGUID(SenderGUID)	
-		SetPortraitTexture(origin, Sender)
+        if SenderName == (nil or "") then
+		    SenderName = UnitTokenFromGUID(SenderGUID)
+		end
+		
+		---- use placeholder avatar picture if no sender could be found. Otherwise, use player portrait.
+		if SenderName == (nil or "") then
+		    origin:SetTexture(134400)
+		else
+		    SetPortraitTexture(origin, SenderName)
+		end
 
 
 
@@ -225,7 +233,7 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
     	OGAE_Frames[VariableName_Emote_Texture]:SetTexture(emote_icon)
 
 
-	
+
     	-- target portrait
 		local TargetExists = false
 		local TargetUnit
@@ -240,7 +248,6 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
 			    TargetUnit = TargetName
 		    end
 		end
-
 		
 		if TargetExists == true then
             local VariableName_Target_Texture = OGAE_General_GenerateVariableString("TargetTexture", OGAE_CurrentListEntry)
@@ -255,17 +262,21 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
         local SubFrame_Origin = OGAE_Frames[VariableName_Origin_Frame]
     	local SubFrame_Emote = OGAE_Frames[VariableName_Emote_Frame]
     	local SubFrame_Target = OGAE_Frames[VariableName_Target_Frame]
-    
-    
+
+
+
         OGAE_Emotes_MoveEntireMenu("up")
-    
+
+
+
         UIFrameFadeIn(SubFrame_Origin, 0.2, 0, 1)
         UIFrameFadeIn(SubFrame_Emote, 0.2, 0, 1)
     	if TargetExists == true then
             UIFrameFadeIn(SubFrame_Target, 0.2, 0, 1)
     	end
-    
-    
+
+
+
     	local duration = OGAE_Settings["Emote_Duration"]
     	local duration2 = (duration+0.2)
         C_Timer.After(duration, function()

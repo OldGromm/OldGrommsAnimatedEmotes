@@ -1,7 +1,7 @@
 ## Interface: 11509, 16001, 20506, 50504, 120100
 ## Title: OldGromm's Animated Emotes
 ## Author: OldGromm
-## Version: 1.0
+## Version: 1.01
 ## IconTexture: 2056011
 ## Notes: Shows a portrait to visualize chat emotes.
 ## Category: Chat

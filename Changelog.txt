@@ -1,3 +1,10 @@
 1.0
 
 - Initial Release
+
+________________________________________________
+
+1.01
+
+- Fixed some of the emote entries not being detected.
+- Fixed error with detecting origin character.
