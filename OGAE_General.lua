@@ -83,7 +83,6 @@ function OGAE_General_DetectGameVersion()
     elseif WOW_PROJECT_ID == 2 and LE_EXPANSION_LEVEL_CURRENT == 0 then -- Classic Era
         OGAE_WoWVersion = "Classic"
     else
-
     end
 end
 
@@ -93,4 +92,63 @@ end
 function OGAE_General_FormatSecondsText(input_value)
     local textstring = string.format(OGAE_Formatting_Seconds, input_value)
 	return textstring 
+end
+
+
+
+
+function OGAE_General_CustomRingColor(input_number, input_mode, input_red, input_green, input_blue)
+    local variable_number = OGAE_Settings["Emote_Icon_Border"]
+    local textstring_number = ("_"..tostring(variable_number))
+	
+	if input_number ~= nil then
+	    textstring_number = ("_"..tostring(input_number))
+	end
+    
+	local textstring_red = ("Ring_Color_Red"..textstring_number)
+    local textstring_green = ("Ring_Color_Green"..textstring_number)
+    local textstring_blue = ("Ring_Color_Blue"..textstring_number)
+
+    if input_mode == "load" then
+        return OGAE_Settings[textstring_red], OGAE_Settings[textstring_green], OGAE_Settings[textstring_blue]
+	elseif input_mode == "save" then
+        OGAE_Settings[textstring_red] = input_red
+        OGAE_Settings[textstring_green] = input_green
+        OGAE_Settings[textstring_blue] = input_blue
+	else
+	end
+end
+
+
+
+
+function OGAE_General_ShowColorPicker()
+    local variable_number = OGAE_Settings["Emote_Icon_Border"]
+
+    local function OnColorChanged()
+        local newR, newG, newB = ColorPickerFrame:GetColorRGB()
+        OGAE_General_CustomRingColor(nil, "save", newR, newG, newB)
+		OGAE_Emotes_UpdateBorderTexture()
+    end
+
+    local function OnCancel()
+        local newR, newG, newB = ColorPickerFrame:GetPreviousValues()
+        OGAE_General_CustomRingColor(nil, "save", newR, newG, newB)
+		OGAE_Emotes_UpdateBorderTexture()
+    end
+
+    local load_red, load_green, load_blue = OGAE_General_CustomRingColor(nil, "load")
+
+    local options = {
+        swatchFunc = OnColorChanged,
+        opacityFunc = OnColorChanged,
+        cancelFunc = OnCancel,
+        hasOpacity = false,
+        opacity = 0,
+        r = load_red,
+        g = load_green,
+        b = load_blue,
+    }
+
+    ColorPickerFrame:SetupColorPickerAndShow(options)
 end

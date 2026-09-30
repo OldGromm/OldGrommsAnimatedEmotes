@@ -4,24 +4,56 @@ function OGAE_Emotes_CreateMainFrame()
     MainFrame:SetPoint("LEFT", 110, 64)
     MainFrame:SetSize(105, 32)
 	MainFrame:SetIgnoreParentScale(true)
-    MainFrame:Hide()
 
 	OGAE_Frames["MainFrame"] = MainFrame
-	
-    -- collection frame where all the emote entries will be stored. It will me moved up or down depending on the visibility status of each emote.	    
+
+
+
+    -- collection frame where all the emote entries will be stored. It will me moved up or down depending on the visibility status of each emote.
 	local CollectionFrame = CreateFrame("Frame", "OGAE_Frame_Collection", OGAE_Frame_Main)
     CollectionFrame:SetPoint("BOTTOM", 0, 0)
     CollectionFrame:SetSize(105, 32)
-	
+
 	OGAE_Frames["CollectionFrame"] = CollectionFrame
-	
-	
-	-- frames for edit mode
+	OGAE_Frames["CollectionFrame"]:Hide()
+
+
+
+	-- frame for edit mode
 	local EditModeFrame = CreateFrame("Frame", "OGAE_Frame_EditMode", OGAE_Frame_Main)
     EditModeFrame:SetPoint("CENTER", 0, 0)
-    EditModeFrame:SetSize(105, 32)	
-	
+    EditModeFrame:SetSize(105, 32)
+
 	OGAE_Frames["EditModeFrame"] = EditModeFrame
+
+
+
+	-- frames for preview
+	local PreviewFrame = CreateFrame("Frame", "OGAE_Frame_Preview", OGAE_Frame_Main)
+    PreviewFrame:SetPoint("CENTER", 0, 0)
+    PreviewFrame:SetSize(32, 32)
+
+    local PreviewPortraitFrame = PreviewFrame:CreateTexture(FrameName_SubFrame_Origin, "ARTWORK")
+    PreviewPortraitFrame:SetPoint("CENTER", PreviewFrame, "CENTER", 0, 0)
+    PreviewPortraitFrame:SetSize(32, 32)
+	PreviewPortraitFrame:SetTexture(134400)
+
+	OGAE_Frames["PreviewFrame"] = PreviewFrame
+	OGAE_Frames["PreviewFrame"]:Hide()
+
+
+    local PreviewBorderFrame = PreviewFrame:CreateTexture(FrameName_SubFrame_Origin, "OVERLAY")
+    PreviewBorderFrame:SetPoint("CENTER", PreviewFrame, "CENTER", 0, 0)
+    PreviewBorderFrame:SetSize(32, 32)
+    PreviewBorderFrame:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\border1")
+
+    OGAE_Frames["OriginBorderPreview"] = PreviewBorderFrame
+
+    local PreviewMaskFrame = PreviewFrame:CreateMaskTexture()
+    PreviewMaskFrame:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\mask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+    PreviewMaskFrame:SetPoint("CENTER", PreviewFrame, "CENTER", 0, 0)
+    PreviewMaskFrame:SetSize(32, 32)
+    PreviewPortraitFrame:AddMaskTexture(PreviewMaskFrame)
 end
 
 
@@ -50,7 +82,6 @@ function OGAE_Emotes_CreateSubFrames()
 
 
 
-
         -- create sub frames to hold both the portrait/emote texture as well as the border texture on top.      
 		local SubFrame_Origin = CreateFrame("Frame", FrameName_SubFrame_Origin, OGAE_Frame_Collection)
         SubFrame_Origin:SetPoint("LEFT", OGAE_Frame_Collection, "LEFT", 0, position_y)
@@ -65,18 +96,18 @@ function OGAE_Emotes_CreateSubFrames()
 
         -- create origin portrait texture and border		
         local OriginFramePortrait = SubFrame_Origin:CreateTexture(FrameName_SubFrame_Origin, "ARTWORK")
-        OriginFramePortrait:SetPoint("LEFT", SubFrame_Origin, "LEFT", 0, 0)
-        OriginFramePortrait:SetSize(32, 32)
+        OriginFramePortrait:SetPoint("CENTER", SubFrame_Origin, "CENTER", 0, 0)
+        OriginFramePortrait:SetSize(30, 30)
         SetPortraitTexture(OriginFramePortrait, "player")
 
         local OriginFrameBorder = SubFrame_Origin:CreateTexture(FrameName_SubFrame_Origin, "OVERLAY")
-        OriginFrameBorder:SetPoint("LEFT", SubFrame_Origin, "LEFT", 0, 0)
+        OriginFrameBorder:SetPoint("CENTER", SubFrame_Origin, "CENTER", 0, 0)
         OriginFrameBorder:SetSize(32, 32)
-        OriginFrameBorder:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\Border1")
+        OriginFrameBorder:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\border1")
 		
         local OriginFramePortraitMask = SubFrame_Origin:CreateMaskTexture()
         OriginFramePortraitMask:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\mask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
-        OriginFramePortraitMask:SetPoint("LEFT", SubFrame_Origin, "LEFT", 0, 0)
+        OriginFramePortraitMask:SetPoint("CENTER", SubFrame_Origin, "CENTER", 0, 0)
         OriginFramePortraitMask:SetSize(32, 32)
         OriginFramePortrait:AddMaskTexture(OriginFramePortraitMask)
 
@@ -84,18 +115,18 @@ function OGAE_Emotes_CreateSubFrames()
 
         -- create emote texture and border		
         local EmoteFrameTexture = SubFrame_Emote:CreateTexture(FrameName_SubFrame_Emote, "ARTWORK")
-        EmoteFrameTexture:SetPoint("LEFT", SubFrame_Emote, "LEFT", 00, 0)
-        EmoteFrameTexture:SetSize(32, 32)
-        EmoteFrameTexture:SetTexture(133836)
+        EmoteFrameTexture:SetPoint("CENTER", SubFrame_Emote, "CENTER", 0, 0)
+        EmoteFrameTexture:SetSize(34, 34)
+        EmoteFrameTexture:SetTexture(134400)
 
         local EmoteFrameBorder = SubFrame_Emote:CreateTexture(FrameName_SubFrame_Emote, "OVERLAY")
-        EmoteFrameBorder:SetPoint("LEFT", SubFrame_Emote, "LEFT", 00, 0)
+        EmoteFrameBorder:SetPoint("CENTER", SubFrame_Emote, "CENTER", 0, 0)
         EmoteFrameBorder:SetSize(32, 32)
-        EmoteFrameBorder:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\Border1")
+        EmoteFrameBorder:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\border1")
 		
         local EmoteFrameTextureMask = SubFrame_Emote:CreateMaskTexture()
         EmoteFrameTextureMask:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\mask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
-        EmoteFrameTextureMask:SetPoint("LEFT", SubFrame_Emote, "LEFT", 0, 0)
+        EmoteFrameTextureMask:SetPoint("CENTER", SubFrame_Emote, "CENTER", 0, 0)
         EmoteFrameTextureMask:SetSize(32, 32)
         EmoteFrameTexture:AddMaskTexture(EmoteFrameTextureMask)
 
@@ -103,18 +134,18 @@ function OGAE_Emotes_CreateSubFrames()
 
         -- create target portrait texture and border		
         local TargetFramePortrait = SubFrame_Target:CreateTexture(FrameName_SubFrame_Target, "ARTWORK")
-        TargetFramePortrait:SetPoint("LEFT", SubFrame_Target, "LEFT", 0, 0)
+        TargetFramePortrait:SetPoint("CENTER", SubFrame_Target, "CENTER", 0, 0)
         TargetFramePortrait:SetSize(32, 32)
         SetPortraitTexture(TargetFramePortrait, "player")
 
         local TargetFrameBorder = SubFrame_Target:CreateTexture(FrameName_SubFrame_Target, "OVERLAY")
-        TargetFrameBorder:SetPoint("LEFT", SubFrame_Target, "LEFT", 0, 0)
+        TargetFrameBorder:SetPoint("CENTER", SubFrame_Target, "CENTER", 0, 0)
         TargetFrameBorder:SetSize(32, 32)
-        TargetFrameBorder:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\Border1")
+        TargetFrameBorder:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\border1")
 		
         local TargetFramePortraitMask = SubFrame_Target:CreateMaskTexture()
         TargetFramePortraitMask:SetTexture("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\mask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
-        TargetFramePortraitMask:SetPoint("LEFT", SubFrame_Target, "LEFT", 0, 0)
+        TargetFramePortraitMask:SetPoint("CENTER", SubFrame_Target, "CENTER", 0, 0)
         TargetFramePortraitMask:SetSize(32, 32)
         TargetFramePortrait:AddMaskTexture(TargetFramePortraitMask)
 
@@ -128,15 +159,14 @@ function OGAE_Emotes_CreateSubFrames()
 		OGAE_Frames[VariableName_Origin_Frame] = SubFrame_Origin
 		OGAE_Frames[VariableName_Origin_Texture] = OriginFramePortrait
 		OGAE_Frames[VariableName_Origin_Border] = OriginFrameBorder
+
 		OGAE_Frames[VariableName_Emote_Frame] = SubFrame_Emote
 		OGAE_Frames[VariableName_Emote_Texture] = EmoteFrameTexture
 		OGAE_Frames[VariableName_Emote_Border] = EmoteFrameBorder
+		
 		OGAE_Frames[VariableName_Target_Frame] = SubFrame_Target
 		OGAE_Frames[VariableName_Target_Texture] = TargetFramePortrait
 		OGAE_Frames[VariableName_Target_Border] = TargetFrameBorder
-		
-		
-		OGAE_Frames["MainFrame"]:Show()
 	end
 end
 
@@ -144,7 +174,13 @@ end
 
 
 function OGAE_Emotes_UpdateBorderTexture(input_number)
-    local BorderTexture = ("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\Border"..tostring(input_number))
+    if input_number == nil then
+	    input_number = OGAE_Settings["Emote_Icon_Border"]
+	end
+	
+	local BorderTexture = ("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\border"..tostring(input_number))
+
+    local load_red, load_green, load_blue = OGAE_General_CustomRingColor(input_number, "load")
 
     for i=1, 10 do
         local VariableName_Origin_Border = OGAE_General_GenerateVariableString("OriginBorder", i)
@@ -154,7 +190,14 @@ function OGAE_Emotes_UpdateBorderTexture(input_number)
         OGAE_Frames[VariableName_Origin_Border]:SetTexture(BorderTexture)
 	    OGAE_Frames[VariableName_Emote_Border]:SetTexture(BorderTexture)
 	    OGAE_Frames[VariableName_Target_Border]:SetTexture(BorderTexture)
+
+		OGAE_Frames[VariableName_Origin_Border]:SetVertexColor(load_red, load_green, load_blue)
+		OGAE_Frames[VariableName_Emote_Border]:SetVertexColor(load_red, load_green, load_blue)
+		OGAE_Frames[VariableName_Target_Border]:SetVertexColor(load_red, load_green, load_blue)
     end
+
+    OGAE_Frames["OriginBorderPreview"]:SetTexture(BorderTexture)
+    OGAE_Frames["OriginBorderPreview"]:SetVertexColor(load_red, load_green, load_blue)
 end
 
 
@@ -191,7 +234,9 @@ end
 
 
 function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
-    local emote_icon = 134400 -- default icon if no data for the current emote exists.
+    OGAE_Frames["PreviewFrame"]:Hide()
+	
+	local emote_icon = 134400 -- default icon if no data for the current emote exists.
     for _, v in pairs(OGAE_EmoteList) do
 	    local emote_icon_new = v[OGAE_WoWVersion]
 		local keywords_list = v["SearchWords"]
@@ -205,8 +250,17 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
 
     if OGAE_CurrentListEntry < 10 then
 
-        -- advance list order
+        -- advance list order.
     	OGAE_CurrentListEntry = (OGAE_CurrentListEntry + 1)
+
+        -- detect sender unit token for fallbacks.
+		local SenderUnitToken = ""
+		if SenderGUID == nil or SenderGUID == "" then
+		
+		else
+		    SenderUnitToken = UnitTokenFromGUID(SenderGUID)
+		end
+
 
 
 
@@ -215,12 +269,12 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
     	local origin = OGAE_Frames[VariableName_Origin_Texture]
     	
 		---- check if player name is availabe. If the value is empty, use the GUID as a backup instead.
-        if SenderName == (nil or "") then
-		    SenderName = UnitTokenFromGUID(SenderGUID)
+        if SenderName == nil or SenderName == "" then
+		    SenderName = SenderUnitToken
 		end
 		
 		---- use placeholder avatar picture if no sender could be found. Otherwise, use player portrait.
-		if SenderName == (nil or "") then
+		if SenderName == nil or SenderName == "" then
 		    origin:SetTexture(134400)
 		else
 		    SetPortraitTexture(origin, SenderName)
@@ -236,12 +290,12 @@ function OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
 
     	-- target portrait
 		local TargetExists = false
-		local TargetUnit
-        if Sender == "player" and UnitExists("target") == true then
+		local TargetUnit = nil
+        if SenderUnitToken == "player" and UnitExists("target") == true then
     	        TargetExists = true
                 TargetUnit = "target"
 		else
-		    if TargetName == (nil or "") then
+		    if TargetName == nil or TargetName == "" then
 			
 			else
 		        TargetExists = true

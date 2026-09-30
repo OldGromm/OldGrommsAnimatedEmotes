@@ -1,8 +1,8 @@
 local OGAE_DefaultEditModeData = {
 	    point = "LEFT",
-        x = 40,
-        y = 0,
-		scale = 1.0
+        x = 65,
+        y = -10,
+		scale = 2.0
 	    }
 
 

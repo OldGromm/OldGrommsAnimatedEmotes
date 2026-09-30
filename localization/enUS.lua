@@ -13,11 +13,19 @@ OGAE_Text_Options_MinimapButton_Description = "Check to show the button. Uncheck
 OGAE_Text_Options_CompartmentButton_Title = "Toggle Compartment Button"
 OGAE_Text_Options_CompartmentButton_Description = "Check to show the button. Uncheck to hide the button."
 
+OGAE_Text_Options_Preview_Title = "Show/Hide Preview"
+OGAE_Text_Options_Preview_Description = "Toggles a preview emote message."
+
 OGAE_Text_Options_EmoteIconBorder_Title = "Change Emote Icon Ring"
 OGAE_Text_Options_EmoteIconBorder_Description = "Changes the ring that is being displayed on the emote icons."
+OGAE_Text_Options_EmoteIconBorder_Type = "Ring Design No."
 
 OGAE_Text_Options_EmoteDuration_Title = "Change Fade-out Time"
 OGAE_Text_Options_EmoteDuration_Description = "Changes the amount of time it takes for each emote notification to disappear."
+
+OGAE_Text_Options_EmoteColor_Title = "Change Ring Color"
+OGAE_Text_Options_EmoteColor_Description = "Changes the color used by the rings."
+OGAE_Text_Options_EmoteColor_Button = "Open Color Menu"
 
 OGAE_Text_RequiresReload = "Changes to this option requires a \"/reload\" or game restart."
 

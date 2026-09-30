@@ -1,6 +1,6 @@
 function OGAE_Options_CreateOptionsEntries()
 
-OGAE_Options_Category = Settings.RegisterVerticalLayoutCategory(OGAE_Text_Options_Category_Title)
+OGAE_Options_Category, OGAE_Options_Layout = Settings.RegisterVerticalLayoutCategory(OGAE_Text_Options_Category_Title)
 
 
 
@@ -9,6 +9,14 @@ local function OnSettingChanged(setting, value)
 	    OGAE_General_ToggleMinimapButton()
 	elseif setting.variable == "OGAE_Options_Change_Emote_Icon_Border" then
 		OGAE_Emotes_UpdateBorderTexture(value)
+	end
+end
+local function TogglePreview()
+    if OGAE_Frames["PreviewFrame"]:IsShown() == true then
+        OGAE_Frames["PreviewFrame"]:Hide()
+	elseif OGAE_Frames["PreviewFrame"]:IsShown() == false then
+        OGAE_Frames["PreviewFrame"]:Show()
+	else
 	end
 end
 
@@ -71,6 +79,14 @@ end
 
 
 do
+    local OGAE_Initializer = CreateSettingsButtonInitializer(OGAE_Text_Options_Preview_Title, OGAE_Text_Options_Preview_Title, TogglePreview, OGAE_Text_Options_Preview_Description, false, newTagID, gameDataFunc)
+    OGAE_Options_Layout:AddInitializer(OGAE_Initializer)
+end
+
+
+
+
+do
     local name = OGAE_Text_Options_EmoteIconBorder_Title
     local variable = "OGAE_Options_Change_Emote_Icon_Border"
 	local variableKey = "Emote_Icon_Border"
@@ -79,8 +95,8 @@ do
     local function GetOptions()
         local container = Settings.CreateControlTextContainer()
 		for i=1, 3 do
-		    local texture = ("Interface\\AddOns\\OldGrommsAnimatedEmotes\\images\\borders\\Border"..tostring(i))
-		    container:Add(i, CreateSimpleTextureMarkup(texture, 16, 16))
+		    local textstring = (OGAE_Text_Options_EmoteIconBorder_Type.." "..tostring(i))
+		    container:Add(i, textstring)
 		end
         return container:GetData()
     end
@@ -89,6 +105,14 @@ do
 	setting:SetValueChangedCallback(OnSettingChanged)
 
     Settings.CreateDropdown(OGAE_Options_Category, setting, GetOptions, tooltip)
+end
+
+
+
+
+do
+    local OGAE_Initializer = CreateSettingsButtonInitializer(OGAE_Text_Options_EmoteColor_Title, OGAE_Text_Options_EmoteColor_Button, OGAE_General_ShowColorPicker, OGAE_Text_Options_EmoteColor_Description, false, newTagID, gameDataFunc)
+    OGAE_Options_Layout:AddInitializer(OGAE_Initializer)
 end
 
 

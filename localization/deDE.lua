@@ -13,11 +13,19 @@ OGAE_Text_Options_MinimapButton_Description = "Ändert den Anzeigestatus des Min
 OGAE_Text_Options_CompartmentButton_Title = "Compartment ein/ausblenden"
 OGAE_Text_Options_CompartmentButton_Description = "Ändert den Anzeigestatus des Compartment-Buttons."
 
+OGAE_Text_Options_Preview_Title = "Vorschau ein-/ausblenden"
+OGAE_Text_Options_Preview_Description = "Eine Beispiel-Emotenachricht wird entweder ein- oder ausgeblendet."
+
 OGAE_Text_Options_EmoteIconBorder_Title = "Emote-Ring ändern"
 OGAE_Text_Options_EmoteIconBorder_Description = "Ändert den Ring, der an den Emote-Symbolen angezeigt wird."
+OGAE_Text_Options_EmoteIconBorder_Type = "Ringdesign Nr."
 
 OGAE_Text_Options_EmoteDuration_Title = "Anzeigedauer ändern"
 OGAE_Text_Options_EmoteDuration_Description = "Ändert die Anzeigedauer eines neuen Emotes."
+
+OGAE_Text_Options_EmoteColor_Title = "Ringfarbe ändern"
+OGAE_Text_Options_EmoteColor_Description = "Ändert die Farbe der Ringe."
+OGAE_Text_Options_EmoteColor_Button = "Farbenmenü öffnen"
 
 OGAE_Text_RequiresReload = "Änderungen an dieser Option treten erst nach einem \"/reload\" oder Neustart des Spiels in Kraft."
 

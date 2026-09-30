@@ -8,3 +8,11 @@ ________________________________________________
 
 - Fixed some of the emote entries not being detected.
 - Fixed error with detecting origin character.
+
+________________________________________________
+
+1.02
+
+- Replaced rings.
+- Added ring coloring feature.
+- Added emote preview feature.

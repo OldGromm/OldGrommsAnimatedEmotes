@@ -6,7 +6,23 @@ OGAE_Event_ChatMessageEmote:SetScript("OnEvent", function(_, event, EmoteText, S
 	if hasanysecretvalues(EmoteText, SenderName, TargetName, SenderGUID) == true then
 
 	else
+	    OGAE_Frames["CollectionFrame"]:Show()
         OGAE_Emotes_AddNewEntry(EmoteText, SenderName, TargetName, SenderGUID)
+	end
+end)
+
+
+
+
+OGAE_Event_RestrictionsBecomeActive = CreateFrame("Frame")
+OGAE_Event_RestrictionsBecomeActive:RegisterEvent("ADDON_RESTRICTION_STATE_CHANGED")
+OGAE_Event_RestrictionsBecomeActive:SetScript("OnEvent", function(_, event, type, state)
+    for i=0, 3 do
+	    if type == i then
+		    if state == 1 then
+			    OGAE_Frames["PreviewFrame"]:Hide()
+			end
+		end
 	end
 end)
 
@@ -22,6 +38,7 @@ OGAE_Event_Setup_PlayerLogin:SetScript("OnEvent", function(_, event)
 	OGAE_Options_CreateOptionsEntries()
     OGAE_Emotes_CreateMainFrame()
 	OGAE_Emotes_CreateSubFrames()
+	OGAE_Emotes_UpdateBorderTexture()
 	OGAE_EditMode_RegisterFrame()
 	OGAE_Other_CreateMinimapButton()
 	OGAE_General_ToggleMinimapButton()
